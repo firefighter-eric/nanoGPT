@@ -1,0 +1,7 @@
+# torch
+
+transformers
+datasets
+tiktoken
+wandb
+tqdm
