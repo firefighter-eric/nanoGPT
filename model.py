@@ -341,10 +341,12 @@ class GPT(nn.Module):
 
         if '3090' in torch.cuda.get_device_name():
             flops_promised = 142e12  # 3090 GPU bfloat16 peak flops is 142 TFLOPS
+        if '4090' in torch.cuda.get_device_name():
+            flops_promised = 330e12  # 4090 GPU bfloat16 peak flops is 330 TFLOPS
         else:
             flops_promised = 312e12  # A100 GPU bfloat16 peak flops is 312 TFLOPS
         mfu = flops_achieved / flops_promised
-        return mfu
+        return mfu, flops_achieved
 
     @torch.no_grad()
     def generate(self, idx, max_new_tokens, temperature=1.0, top_k=None):
